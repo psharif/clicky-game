@@ -26,9 +26,6 @@ class App extends Component {
   selectKing = id => {
     //Push the id of the cards that have been chosen
     this.state.chosen.push(id);
-    ///Remove This //////////////////
-    console.log(this.state.chosen);
-    //////////////////////////////////
     if(!this.checkDone()){
       const order = this.shuffleCards();
       const kings = this.state.kings.map((king, i) => {
