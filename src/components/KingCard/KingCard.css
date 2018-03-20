@@ -14,7 +14,9 @@
   text-align: center;
 }
 .card > .img-container > img {
-  height: 98%;
+  /*Turn this back to 98%*/
+  height: 78%;
+  /*Turn this back to 98%*/
 }
 
 .card > .remove {

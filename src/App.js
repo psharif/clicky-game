@@ -10,33 +10,33 @@ class App extends Component {
   state = {
     kings, 
     chosen : [], 
-    done : false 
+    gameStatus : "Spot The Difference Game"
   };
 
   checkDone = () =>{
-    console.log(this.includesDuplicates());
+    if(this.state.chosen.length === 16) this.setState({gameStatus: "You Won"});
+    if(this.includesDuplicates()) this.setState({gameStatus: "You Lost"});
     return this.state.chosen.length === 16 || this.includesDuplicates();
   };
+
+  includesDuplicates = () =>{
+     return new Set(this.state.chosen).size !== this.state.chosen.length;
+  }
 
   selectKing = id => {
     //Push the id of the cards that have been chosen
     this.state.chosen.push(id);
-    console.log(`Is the game finished: ${this.checkDone()}`);
+    ///Remove This //////////////////
     console.log(this.state.chosen);
-    const order = this.shuffleCards();
-    const kings = this.state.kings.map((king, i) => {
-      return this.state.kings.find(card => card.id === order[i]);
-    });
-    console.log(kings);
-    this.setState({kings});
+    //////////////////////////////////
+    if(!this.checkDone()){
+      const order = this.shuffleCards();
+      const kings = this.state.kings.map((king, i) => {
+        return this.state.kings.find(card => card.id === order[i]);
+      });
+      this.setState({kings});
+    }
   };
-
-  includesDuplicates = () =>{
-     const temp = new Set(this.state.chosen);
-     temp.forEach(el => console.log(el));
-     console.log(`The new set is ${temp}`);
-     return new Set(this.state.chosen).size !== this.state.chosen.length;
-  }
 
   shuffleCards = () => {
     const ordered = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
@@ -48,7 +48,6 @@ class App extends Component {
       chosen = ordered.splice(random,1)[0];
       shuffled.unshift(chosen);
     }
-    console.log(shuffled);
     return shuffled;
   }
 
@@ -56,7 +55,7 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-        <Title>Spot The Difference Game</Title>
+        <Title>{this.state.gameStatus}</Title>
         {this.state.kings.map(king => (
           <KingCard
             selectKing={this.selectKing}
