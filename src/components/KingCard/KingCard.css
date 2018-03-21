@@ -5,7 +5,7 @@
   margin: 0.5rem;
   position: relative;
   width: 275px;
-  box-shadow: 0 3px 6px #999, 0 3px 6px #999;
+  box-shadow: 0 5px 10px #000, 0 5px 10px #000;
   text-align: left;
 }
 
@@ -15,17 +15,4 @@
 }
 .card > .img-container > img {
   height: 98%;
-}
-
-.card > .remove {
-  color: #ff1744;
-  font-size: 48px;
-  position: absolute;
-  top: -20px;
-  right: 5px;
-  cursor: pointer;
-}
-
-.card > .remove:hover {
-  color: #d50000;
 }

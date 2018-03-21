@@ -10,7 +10,7 @@ class App extends Component {
   state = {
     kings, 
     chosen : [], 
-    gameStatus : "Spot The Difference Game"
+    gameStatus : "Pick A Card You Haven't Picked"
   };
 
   checkDone = () =>{
@@ -33,6 +33,9 @@ class App extends Component {
       });
       this.setState({kings});
     }
+    // else{
+    //   this.resetGame()
+    // }
   };
 
   shuffleCards = () => {
@@ -47,6 +50,11 @@ class App extends Component {
     }
     return shuffled;
   }
+
+  // resetGame = () =>{
+  //   this.setState({chosen: []});
+  //   this.setState({gameStatus: "Pick A Card You Haven't Picked"})
+  // }
 
   // Map over this.state.friends and render a KingCard component for each friend object
   render() {
