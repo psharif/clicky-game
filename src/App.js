@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import KingCard from "./components/KingCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
+import Score from "./components/Score";
+import TitleWrapper from "./components/TitleWrapper";
 import kings from "./kings.json";
 import "./App.css";
 
@@ -10,7 +12,8 @@ class App extends Component {
   state = {
     kings, 
     chosen : [], 
-    gameStatus : "Pick A Card You Haven't Picked"
+    gameStatus : "Pick A Card You Haven't Picked",
+    score: 0
   };
 
   checkDone = () =>{
@@ -27,6 +30,7 @@ class App extends Component {
     //Push the id of the cards that have been chosen
     this.state.chosen.push(id);
     if(!this.checkDone()){
+      this.setState({score: this.state.score + 1})
       const order = this.shuffleCards();
       const kings = this.state.kings.map((king, i) => {
         return this.state.kings.find(card => card.id === order[i]);
@@ -60,7 +64,10 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-        <Title>{this.state.gameStatus}</Title>
+        <TitleWrapper>
+          <Title>{this.state.gameStatus}</Title>
+          <Score>Score:&nbsp;{this.state.score}</Score>
+        </TitleWrapper>
         {this.state.kings.map(king => (
           <KingCard
             selectKing={this.selectKing}
